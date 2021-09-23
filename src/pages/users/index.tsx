@@ -85,6 +85,64 @@ export default function UserList() {
                 </Td>
               </Tr>
             </Tbody>
+            <Tbody>
+              <Tr>
+                <Td px="6">
+                  <Checkbox colorScheme="pink" />
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">Vitor Nunes</Text>
+                    <Text fontSize="sm" color="gray.300">
+                      vnn2006@gmail.com
+                    </Text>
+                  </Box>
+                </Td>
+                <Td>17 de Setembro 2021</Td>
+                <Td>
+                  <Button
+                    w="28"
+                    height="8"
+                    as="a"
+                    size="sn"
+                    fontSize="sn"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} fontSize="15" />}
+                  >
+                    Editar
+                  </Button>
+                </Td>
+              </Tr>
+            </Tbody>
+            <Tbody>
+              <Tr>
+                <Td px="6">
+                  <Checkbox colorScheme="pink" />
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">Vitor Nunes</Text>
+                    <Text fontSize="sm" color="gray.300">
+                      vnn2006@gmail.com
+                    </Text>
+                  </Box>
+                </Td>
+                <Td>17 de Setembro 2021</Td>
+                <Td>
+                  <Button
+                    w="28"
+                    height="8"
+                    as="a"
+                    size="sn"
+                    fontSize="sn"
+                    colorScheme="purple"
+                    leftIcon={<Icon as={RiPencilLine} fontSize="15" />}
+                  >
+                    Editar
+                  </Button>
+                </Td>
+              </Tr>
+            </Tbody>
           </Table>
 
           <Pagination />
