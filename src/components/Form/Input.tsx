@@ -21,10 +21,10 @@ export function Input({ name, label, ...rest }: InputProps) {
         focusBorderColor="pink.500"
         bgColor="gray.900"
         variant="filled"
+        size="lg"
         _hover={{
           bgColor: 'gray.900',
         }}
-        size="lg"
         {...rest}
       />
     </FormControl>
