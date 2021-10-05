@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Box,
   Divider,
@@ -11,7 +12,6 @@ import {
 import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
 import { Sidebar } from '../../components/Sidebar';
-import Link from 'next/link';
 
 export default function CreateUser() {
   return (
@@ -56,8 +56,8 @@ export default function CreateUser() {
                 <Button as="a" colorScheme="whiteAlpha">
                   Cancelar
                 </Button>
-                <Button colorScheme="pink">Salvar</Button>
               </Link>
+              <Button colorScheme="pink">Salvar</Button>
             </HStack>
           </Flex>
         </Box>
