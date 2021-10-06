@@ -36,6 +36,7 @@ export function SearchBox() {
         placeholder="Buscar na plataforma"
         _placeholder={{ color: 'gray.400' }}
         ref="searchInputRef"
+        autoFocus
       />
 
       <Icon as={RiSearchLine} fontSize="2xl" />
