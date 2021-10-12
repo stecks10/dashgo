@@ -1,5 +1,11 @@
-import { createServer, Factory, Model } from 'miragejs';
 import faker from 'faker';
+import {
+  ActiveModelSerializer,
+  createServer,
+  Factory,
+  Model,
+  Response,
+} from 'miragejs';
 
 type User = {
   name: string;
@@ -7,19 +13,30 @@ type User = {
   created_at: string;
 };
 
+// User
+// Address
+
+// Active Model
+// { name: "Diego", email:"email@teste.com", address: {"..."} }
+
 export function makeServer() {
   const server = createServer({
+    serializers: {
+      application: ActiveModelSerializer,
+    },
+
     models: {
       user: Model.extend<Partial<User>>({}),
     },
 
+    // gerar dados em massa
     factories: {
       user: Factory.extend({
-        name(i: number) {
-          return `User ${i + 1}`;
+        name() {
+          return faker.name.findName();
         },
         email() {
-          return faker.internet.email().toLocaleLowerCase;
+          return faker.internet.email().toLowerCase();
         },
         createdAt() {
           return faker.date.recent(10);
@@ -27,18 +44,50 @@ export function makeServer() {
       }),
     },
 
+    // criação de users fake
     seeds(server) {
-      server.createList('user', 200);
+      server.createList('user', 100);
     },
 
     routes() {
+      // rota: '/api/users'
       this.namespace = 'api';
+
+      // delay de 750ms
       this.timing = 750;
 
-      this.get('/users');
+      // CRUD
+      this.get('/users', function (schema, request) {
+        // page -> qual página estou exibindo no momento
+        // per_page -> quantos registros vou exibir por página
+        const { page = 1, per_page = 10 } = request.queryParams;
+
+        // total de registros (users)
+        const total = schema.all('user').length;
+
+        // exemplo para page = 3
+        // pageStart = (3-1)*10 = 20
+        // pageEnd = 20 + 10 = 30
+        // na página 3 -> vou exibir os registros (users) de 20 - 30
+        const pageStart = (Number(page) - 1) * Number(per_page);
+        const pageEnd = pageStart + Number(per_page);
+
+        const users = this.serialize(schema.all('user')).users.slice(
+          pageStart,
+          pageEnd
+        );
+
+        // 200 -> código HTTP: OK
+        return new Response(200, { 'x-total-count': String(total) }, { users });
+      });
+
+      this.get('/users/:id');
       this.post('/users');
 
+      // resetar as rotas para default
       this.namespace = '';
+
+      // tenta fazer as requisições pelo mirage, se não der certo, "passe a diante"
       this.passthrough();
     },
   });
