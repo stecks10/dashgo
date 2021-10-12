@@ -13,6 +13,7 @@ interface InputProps extends ChakraInputProps {
   label?: string;
   error?: FieldError;
 }
+
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { name, label, error = null, ...rest },
   ref
@@ -22,15 +23,16 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
 
       <ChakraInput
-        name="email"
+        name={name}
         id={name}
+        type="email"
         focusBorderColor="pink.500"
         bgColor="gray.900"
         variant="filled"
-        size="lg"
         _hover={{
           bgColor: 'gray.900',
         }}
+        size="lg"
         ref={ref}
         {...rest}
       />
