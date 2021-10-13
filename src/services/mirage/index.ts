@@ -46,7 +46,7 @@ export function makeServer() {
 
     // criação de users fake
     seeds(server) {
-      server.createList('user', 100);
+      server.createList('user', 200);
     },
 
     routes() {
